@@ -5,81 +5,83 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
-        // 1. Usuarios del sistema (Admin y Cajero)
-        DB::table('users')->insert([
-            [
-                'name' => 'Administrador General',
-                'email' => 'admin@sigicom.com',
-                'role' => 'Administrador',
-                'password' => Hash::make('admin123'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Cajero Mostrador',
-                'email' => 'cajero@sigicom.com',
-                'role' => 'Cajero',
-                'password' => Hash::make('cajero123'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+        try {
+            // 1. Deshabilitar temporalmente la verificación de claves foráneas
+            Schema::disableForeignKeyConstraints();
 
-        // 2. Categorías
-        $catAbarrotes = DB::table('categories')->insertGetId([
-            'name' => 'Abarrotes',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+            // 2. Limpieza de tablas (DDL) antes de iniciar la transacción en MySQL
+            DB::table('detalles_ventas')->truncate();
+            DB::table('ventas')->truncate();
+            DB::table('detalles_compras')->truncate();
+            DB::table('compras')->truncate();
+            DB::table('productos')->truncate();
+            DB::table('clientes')->truncate();
+            DB::table('proveedores')->truncate();
+            DB::table('categorias')->truncate();
+            DB::table('usuarios')->truncate();
 
-        $catBebidas = DB::table('categories')->insertGetId([
-            'name' => 'Bebidas',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+            // 3. Iniciar la transacción para proteger la carga de datos
+            DB::beginTransaction();
 
-        // 3. Proveedores
-        $supplierId = DB::table('suppliers')->insertGetId([
-            'name' => 'Distribuidora Comercial S.A.S.',
-            'phone' => '3001234567',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+            // --- Carga de Usuarios ---
+            $usuarios = [
+                [
+                    'nombre' => 'Administrador General',
+                    'email' => 'admin@sigicom.com',
+                    'rol' => 'Administrador',
+                    'password' => Hash::make('admin123'),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'nombre' => 'Cajero Mostrador',
+                    'email' => 'cajero@sigicom.com',
+                    'rol' => 'Cajero',
+                    'password' => Hash::make('cajero123'),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+            ];
+            DB::table('usuarios')->insert($usuarios);
 
-        // 4. Clientes
-        $customerId = DB::table('customers')->insertGetId([
-            'name' => 'Consumidor Frecuente',
-            'phone' => '3109876543',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+            // --- Carga de Categorías ---
+            $categorias = [
+                ['nombre' => 'Abarrotes', 'created_at' => now(), 'updated_at' => now()],
+                ['nombre' => 'Bebidas', 'created_at' => now(), 'updated_at' => now()],
+            ];
+            DB::table('categorias')->insert($categorias);
 
-        // 5. Catálogo de Productos
-        DB::table('products')->insert([
-            [
-                'name' => 'Arroz Diana 1kg',
-                'category_id' => $catAbarrotes,
-                'sale_price' => 4500.00,
-                'current_stock' => 50,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Gaseosa Postobón 1.5L',
-                'category_id' => $catBebidas,
-                'sale_price' => 4000.00,
-                'current_stock' => 30,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+            // --- Carga de Proveedores ---
+            $proveedores = [
+                ['nombre' => 'Distribuidora Central S.A.S.', 'telefono' => '3001234567', 'created_at' => now(), 'updated_at' => now()],
+            ];
+            DB::table('proveedores')->insert($proveedores);
+
+            // --- Carga de Clientes ---
+            $clientes = [
+                ['nombre' => 'Consumidor Final', 'telefono' => '3109876543', 'created_at' => now(), 'updated_at' => now()],
+            ];
+            DB::table('clientes')->insert($clientes);
+
+            // 4. Confirmar la transacción si todo se insertó correctamente
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            // Revertir los cambios si ocurre algún error durante la inserción
+            DB::rollBack();
+            dump('Error durante la inserción del Seeder: ' . $th->getMessage());
+        } finally {
+            // Habilitar de nuevo las claves foráneas obligatoriamente
+            Schema::enableForeignKeyConstraints();
+        }
     }
 }
