@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ventas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+    Schema::create('ventas', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('cliente_id')->nullable()->constrained('clientes')->nullOnDelete();
+        $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+        $table->dateTime('fecha');
+        $table->decimal('total', 12, 2)->default(0.00);
+        $table->timestamps();
+    });
     }
 
     /**
