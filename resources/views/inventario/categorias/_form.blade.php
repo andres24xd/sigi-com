@@ -4,7 +4,7 @@
             name="nombre"
             label="Nombre de la categoría"
             :value="$categoria->nombre ?? ''"
-            placeholder="Ej. Abarrotes"
+            placeholder="Ej. Herramientas"
             required
             autofocus
         />

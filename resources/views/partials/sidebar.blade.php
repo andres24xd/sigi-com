@@ -72,6 +72,6 @@
                 <p class="truncate text-[11px] text-slate-400">{{ $usuarioActual->rol ?? 'Administrador' }}</p>
             </div>
         </div>
-        <p class="mt-3 px-1 text-[10px] uppercase tracking-wider text-slate-600">SIGI-COM · v1.0 · Actividad 3</p>
+        <p class="mt-3 px-1 text-[10px] uppercase tracking-wider text-slate-600">SIGI-COM · v1.0</p>
     </div>
 </aside>

@@ -4,7 +4,7 @@
             name="nombre"
             label="Nombre del producto"
             :value="$producto->nombre ?? ''"
-            placeholder="Ej. Arroz Diana 1 kg"
+            placeholder="Ej. Martillo de uña 16 oz"
             required
             autofocus
         />

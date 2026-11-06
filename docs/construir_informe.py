@@ -432,8 +432,8 @@ def main() -> None:
     )
     parrafo(
         doc,
-        "Prueba en navegador: 3 unidades de Aceite Premier (12.500) + 2 unidades de Agua "
-        "Cristal (2.000) = $ 41.500, con stock disponible en cada línea.",
+        "Prueba en navegador: 2 unidades de Martillo de uña 16 oz (32.000) + 3 unidades "
+        "de Bisagra zincada (9.500) = $ 92.500, con stock disponible en cada línea.",
         italic=True,
     )
 
@@ -456,7 +456,7 @@ def main() -> None:
 
     parrafo(doc, "9.4 Ventas", bold=True, size=10)
     imagen(doc, "08-ventas.png", "Historial de ventas con filtros por cliente, cajero y fechas.")
-    imagen(doc, "09b-venta-form-dinamica.png", "Dos líneas agregadas en tiempo real; total $ 41.500.")
+    imagen(doc, "09b-venta-form-dinamica.png", "Dos líneas agregadas en tiempo real; total $ 92.500.")
     imagen(doc, "10-venta-detalle.png", "Comprobante de venta con cliente, cajero y detalle.")
 
     parrafo(doc, "9.5 Terceros", bold=True, size=10)

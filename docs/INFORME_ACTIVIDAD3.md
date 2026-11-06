@@ -230,8 +230,8 @@ Ambos formularios permiten agregar y quitar líneas sin recargar la página. El 
 4. En ventas, toma el precio del catálogo, muestra el stock disponible y bloquea productos agotados.
 5. En compras, permite digitar el costo unitario.
 
-Ejemplo verificado en navegador: 3 unidades de Aceite Premier (12.500) + 2 unidades de
-Agua Cristal (2.000) = **$ 41.500**, con stock disponible mostrado en cada línea.
+Ejemplo verificado en navegador: 2 unidades de Martillo de uña 16 oz (32.000) + 3 unidades
+de Bisagra zincada 3" (9.500) = **$ 92.500**, con stock disponible mostrado en cada línea.
 
 ### Servidor
 

@@ -102,7 +102,7 @@ class DatabaseSeeder extends Seeder
         // -----------------------------------------------------------------
         $idsCategorias = [];
 
-        foreach (['Abarrotes', 'Bebidas', 'Aseo', 'Lácteos'] as $nombre) {
+        foreach (['Herramientas', 'Tornillería', 'Pinturas', 'Plomería'] as $nombre) {
             $idsCategorias[$nombre] = DB::table('categorias')->insertGetId([
                 'nombre' => $nombre,
                 'created_at' => $ahora,
@@ -114,9 +114,9 @@ class DatabaseSeeder extends Seeder
         // 3. Proveedores
         // -----------------------------------------------------------------
         $proveedores = [
-            ['nombre' => 'Distribuidora Central S.A.S.', 'telefono' => '3001234567'],
-            ['nombre' => 'Lácteos del Caribe', 'telefono' => '3012223344'],
-            ['nombre' => 'Aseo Total S.A.S.', 'telefono' => '3023334455'],
+            ['nombre' => 'Ferretería Central S.A.S.', 'telefono' => '3001234567'],
+            ['nombre' => 'Importadora Andina de Herramientas', 'telefono' => '3012223344'],
+            ['nombre' => 'Pinturas y Acabados del Norte', 'telefono' => '3023334455'],
         ];
 
         $idsProveedores = [];
@@ -131,9 +131,9 @@ class DatabaseSeeder extends Seeder
         // 4. Clientes
         // -----------------------------------------------------------------
         $clientes = [
-            ['nombre' => 'María Pérez', 'telefono' => '3101112233'],
-            ['nombre' => 'Jorge Díaz', 'telefono' => '3112223344'],
-            ['nombre' => 'Ana Torres', 'telefono' => '3123334455'],
+            ['nombre' => 'Constructora El Roble S.A.S.', 'telefono' => '3101112233'],
+            ['nombre' => 'Carlos Mendoza', 'telefono' => '3112223344'],
+            ['nombre' => 'Laura Restrepo', 'telefono' => '3123334455'],
         ];
 
         $idsClientes = [];
@@ -148,16 +148,16 @@ class DatabaseSeeder extends Seeder
         // 5. Productos (el stock arranca en 0 y lo mueven los detalles)
         // -----------------------------------------------------------------
         $productos = [
-            ['nombre' => 'Arroz Diana 1 kg', 'categoria' => 'Abarrotes', 'precio_venta' => 3500],
-            ['nombre' => 'Aceite Premier 1 L', 'categoria' => 'Abarrotes', 'precio_venta' => 12500],
-            ['nombre' => 'Panela 500 g', 'categoria' => 'Abarrotes', 'precio_venta' => 2500],
-            ['nombre' => 'Gaseosa Coca-Cola 1.5 L', 'categoria' => 'Bebidas', 'precio_venta' => 6500],
-            ['nombre' => 'Agua Cristal 600 ml', 'categoria' => 'Bebidas', 'precio_venta' => 2000],
-            ['nombre' => 'Jugo Hit 500 ml', 'categoria' => 'Bebidas', 'precio_venta' => 2800],
-            ['nombre' => 'Jabón Rey 300 g', 'categoria' => 'Aseo', 'precio_venta' => 3000],
-            ['nombre' => 'Detergente Fab 1 kg', 'categoria' => 'Aseo', 'precio_venta' => 9000],
-            ['nombre' => 'Leche Alquería 1 L', 'categoria' => 'Lácteos', 'precio_venta' => 4200],
-            ['nombre' => 'Queso Campesino 250 g', 'categoria' => 'Lácteos', 'precio_venta' => 7000],
+            ['nombre' => 'Martillo de uña 16 oz', 'categoria' => 'Herramientas', 'precio_venta' => 32000],
+            ['nombre' => 'Juego de destornilladores 6 piezas', 'categoria' => 'Herramientas', 'precio_venta' => 45000],
+            ['nombre' => 'Llave ajustable 10 pulgadas', 'categoria' => 'Herramientas', 'precio_venta' => 38000],
+            ['nombre' => 'Tornillo autoperforante 8 x 1" (caja x 100)', 'categoria' => 'Tornillería', 'precio_venta' => 18000],
+            ['nombre' => 'Chazo plástico 1/4" (caja x 50)', 'categoria' => 'Tornillería', 'precio_venta' => 12000],
+            ['nombre' => 'Bisagra zincada 3" (par)', 'categoria' => 'Tornillería', 'precio_venta' => 9500],
+            ['nombre' => 'Pintura acrílica blanca 1 galón', 'categoria' => 'Pinturas', 'precio_venta' => 78000],
+            ['nombre' => 'Brocha de cerda 3"', 'categoria' => 'Pinturas', 'precio_venta' => 14500],
+            ['nombre' => 'Thinner corriente 1 litro', 'categoria' => 'Pinturas', 'precio_venta' => 11000],
+            ['nombre' => 'Tubo PVC presión 1/2" x 6 m', 'categoria' => 'Plomería', 'precio_venta' => 26000],
         ];
 
         $idsProductos = [];
@@ -178,31 +178,31 @@ class DatabaseSeeder extends Seeder
         // -----------------------------------------------------------------
         $compras = [
             [
-                'proveedor' => 'Distribuidora Central S.A.S.',
+                'proveedor' => 'Ferretería Central S.A.S.',
                 'fecha' => $ahora->copy()->subDays(4)->setTime(8, 0),
                 'detalles' => [
-                    ['producto' => 'Arroz Diana 1 kg', 'cantidad' => 50, 'precio_unitario' => 2800],
-                    ['producto' => 'Aceite Premier 1 L', 'cantidad' => 30, 'precio_unitario' => 10000],
-                    ['producto' => 'Gaseosa Coca-Cola 1.5 L', 'cantidad' => 40, 'precio_unitario' => 5000],
-                    ['producto' => 'Panela 500 g', 'cantidad' => 2, 'precio_unitario' => 1800],
-                    ['producto' => 'Jugo Hit 500 ml', 'cantidad' => 30, 'precio_unitario' => 2000],
-                    ['producto' => 'Agua Cristal 600 ml', 'cantidad' => 48, 'precio_unitario' => 1500],
+                    ['producto' => 'Martillo de uña 16 oz', 'cantidad' => 30, 'precio_unitario' => 22000],
+                    ['producto' => 'Juego de destornilladores 6 piezas', 'cantidad' => 20, 'precio_unitario' => 32000],
+                    ['producto' => 'Llave ajustable 10 pulgadas', 'cantidad' => 25, 'precio_unitario' => 27000],
+                    ['producto' => 'Tornillo autoperforante 8 x 1" (caja x 100)', 'cantidad' => 40, 'precio_unitario' => 12000],
+                    ['producto' => 'Chazo plástico 1/4" (caja x 50)', 'cantidad' => 60, 'precio_unitario' => 8000],
                 ],
             ],
             [
-                'proveedor' => 'Lácteos del Caribe',
+                'proveedor' => 'Importadora Andina de Herramientas',
                 'fecha' => $ahora->copy()->subDays(3)->setTime(8, 30),
                 'detalles' => [
-                    ['producto' => 'Leche Alquería 1 L', 'cantidad' => 60, 'precio_unitario' => 3500],
-                    ['producto' => 'Queso Campesino 250 g', 'cantidad' => 8, 'precio_unitario' => 5500],
+                    ['producto' => 'Bisagra zincada 3" (par)', 'cantidad' => 12, 'precio_unitario' => 6500],
+                    ['producto' => 'Tubo PVC presión 1/2" x 6 m', 'cantidad' => 50, 'precio_unitario' => 18000],
                 ],
             ],
             [
-                'proveedor' => 'Aseo Total S.A.S.',
+                'proveedor' => 'Pinturas y Acabados del Norte',
                 'fecha' => $ahora->copy()->subDays(2)->setTime(9, 0),
                 'detalles' => [
-                    ['producto' => 'Jabón Rey 300 g', 'cantidad' => 35, 'precio_unitario' => 2200],
-                    ['producto' => 'Detergente Fab 1 kg', 'cantidad' => 25, 'precio_unitario' => 7000],
+                    ['producto' => 'Pintura acrílica blanca 1 galón', 'cantidad' => 24, 'precio_unitario' => 58000],
+                    ['producto' => 'Brocha de cerda 3"', 'cantidad' => 8, 'precio_unitario' => 9500],
+                    ['producto' => 'Thinner corriente 1 litro', 'cantidad' => 10, 'precio_unitario' => 7500],
                 ],
             ],
         ];
@@ -243,12 +243,13 @@ class DatabaseSeeder extends Seeder
         // -----------------------------------------------------------------
         $ventas = [
             [
-                'cliente' => 'María Pérez',
+                'cliente' => 'Constructora El Roble S.A.S.',
                 'usuario' => 'cajero@sigicom.com',
                 'fecha' => $ahora->copy()->subDays(3)->setTime(10, 15),
                 'detalles' => [
-                    ['producto' => 'Arroz Diana 1 kg', 'cantidad' => 3, 'precio_unitario' => 3500],
-                    ['producto' => 'Leche Alquería 1 L', 'cantidad' => 2, 'precio_unitario' => 4200],
+                    ['producto' => 'Martillo de uña 16 oz', 'cantidad' => 3, 'precio_unitario' => 32000],
+                    ['producto' => 'Tornillo autoperforante 8 x 1" (caja x 100)', 'cantidad' => 5, 'precio_unitario' => 18000],
+                    ['producto' => 'Bisagra zincada 3" (par)', 'cantidad' => 4, 'precio_unitario' => 9500],
                 ],
             ],
             [
@@ -256,28 +257,27 @@ class DatabaseSeeder extends Seeder
                 'usuario' => 'cajero@sigicom.com',
                 'fecha' => $ahora->copy()->subDays(2)->setTime(16, 40),
                 'detalles' => [
-                    ['producto' => 'Gaseosa Coca-Cola 1.5 L', 'cantidad' => 2, 'precio_unitario' => 6500],
-                    ['producto' => 'Jabón Rey 300 g', 'cantidad' => 1, 'precio_unitario' => 3000],
+                    ['producto' => 'Pintura acrílica blanca 1 galón', 'cantidad' => 1, 'precio_unitario' => 78000],
+                    ['producto' => 'Brocha de cerda 3"', 'cantidad' => 2, 'precio_unitario' => 14500],
                 ],
             ],
             [
-                'cliente' => 'Jorge Díaz',
+                'cliente' => 'Carlos Mendoza',
                 'usuario' => 'admin@sigicom.com',
                 'fecha' => $ahora->copy()->subDay()->setTime(11, 20),
                 'detalles' => [
-                    ['producto' => 'Aceite Premier 1 L', 'cantidad' => 1, 'precio_unitario' => 12500],
-                    ['producto' => 'Detergente Fab 1 kg', 'cantidad' => 1, 'precio_unitario' => 9000],
-                    ['producto' => 'Queso Campesino 250 g', 'cantidad' => 1, 'precio_unitario' => 7000],
+                    ['producto' => 'Juego de destornilladores 6 piezas', 'cantidad' => 1, 'precio_unitario' => 45000],
+                    ['producto' => 'Llave ajustable 10 pulgadas', 'cantidad' => 1, 'precio_unitario' => 38000],
+                    ['producto' => 'Tubo PVC presión 1/2" x 6 m', 'cantidad' => 2, 'precio_unitario' => 26000],
                 ],
             ],
             [
-                'cliente' => 'Ana Torres',
+                'cliente' => 'Laura Restrepo',
                 'usuario' => 'cajero@sigicom.com',
                 'fecha' => $ahora->copy()->setTime(9, 5),
                 'detalles' => [
-                    ['producto' => 'Agua Cristal 600 ml', 'cantidad' => 3, 'precio_unitario' => 2000],
-                    ['producto' => 'Jugo Hit 500 ml', 'cantidad' => 2, 'precio_unitario' => 2800],
-                    ['producto' => 'Panela 500 g', 'cantidad' => 2, 'precio_unitario' => 2500],
+                    ['producto' => 'Chazo plástico 1/4" (caja x 50)', 'cantidad' => 2, 'precio_unitario' => 12000],
+                    ['producto' => 'Thinner corriente 1 litro', 'cantidad' => 1, 'precio_unitario' => 11000],
                 ],
             ],
         ];
