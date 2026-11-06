@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('detalles_compras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('compra_id')->constrained('compras')->onDelete('cascade');
-            $table->foreignId('producto_id')->constrained('productos')->onDelete('cascade');
-            $table->integer('cantidad');
+            $table->foreignId('compra_id')->constrained('compras')->cascadeOnDelete();
+            $table->foreignId('producto_id')->constrained('productos')->restrictOnDelete();
+            $table->unsignedInteger('cantidad');
             $table->decimal('precio_unitario', 10, 2);
             $table->timestamps();
         });

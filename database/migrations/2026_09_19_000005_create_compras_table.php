@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('proveedor_id')->constrained('proveedores')->onDelete('cascade');
+            $table->foreignId('proveedor_id')->constrained('proveedores')->restrictOnDelete();
             $table->date('fecha');
             $table->decimal('total', 12, 2)->default(0.00);
             $table->timestamps();
+
+            $table->index('fecha');
         });
     }
 

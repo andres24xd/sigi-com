@@ -14,10 +14,12 @@ return new class extends Migration
     Schema::create('ventas', function (Blueprint $table) {
         $table->id();
         $table->foreignId('cliente_id')->nullable()->constrained('clientes')->nullOnDelete();
-        $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+        $table->foreignId('usuario_id')->constrained('usuarios')->restrictOnDelete();
         $table->dateTime('fecha');
         $table->decimal('total', 12, 2)->default(0.00);
         $table->timestamps();
+
+        $table->index('fecha');
     });
     }
 
