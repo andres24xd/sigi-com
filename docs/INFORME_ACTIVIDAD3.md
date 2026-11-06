@@ -417,7 +417,7 @@ Credenciales sembradas: `admin@sigicom.com / admin123` y `cajero@sigicom.com / c
 - Los controladores delegan la validación en Form Requests y protegen las operaciones
   transaccionales de compras y ventas.
 - El layout maestro y los componentes Blade mantienen una identidad visual consistente en
-  las 21 pantallas del sistema.
+  las 23 pantallas del sistema.
 - El diseño es responsivo: se verificó en 1440 px y 390 px, corrigiendo el desbordamiento
   horizontal y adaptando las tablas.
 - La aplicación queda lista para la siguiente fase: autenticación, roles y permisos.
