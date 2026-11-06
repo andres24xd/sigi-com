@@ -179,27 +179,27 @@ class DatabaseSeeder extends Seeder
         $compras = [
             [
                 'proveedor' => 'Distribuidora Central S.A.S.',
-                'fecha' => $ahora->copy()->subDays(10)->setTime(9, 0),
+                'fecha' => $ahora->copy()->subDays(4)->setTime(8, 0),
                 'detalles' => [
                     ['producto' => 'Arroz Diana 1 kg', 'cantidad' => 50, 'precio_unitario' => 2800],
                     ['producto' => 'Aceite Premier 1 L', 'cantidad' => 30, 'precio_unitario' => 10000],
                     ['producto' => 'Gaseosa Coca-Cola 1.5 L', 'cantidad' => 40, 'precio_unitario' => 5000],
-                    ['producto' => 'Panela 500 g', 'cantidad' => 40, 'precio_unitario' => 1800],
+                    ['producto' => 'Panela 500 g', 'cantidad' => 2, 'precio_unitario' => 1800],
                     ['producto' => 'Jugo Hit 500 ml', 'cantidad' => 30, 'precio_unitario' => 2000],
                     ['producto' => 'Agua Cristal 600 ml', 'cantidad' => 48, 'precio_unitario' => 1500],
                 ],
             ],
             [
                 'proveedor' => 'Lácteos del Caribe',
-                'fecha' => $ahora->copy()->subDays(7)->setTime(8, 30),
+                'fecha' => $ahora->copy()->subDays(3)->setTime(8, 30),
                 'detalles' => [
                     ['producto' => 'Leche Alquería 1 L', 'cantidad' => 60, 'precio_unitario' => 3500],
-                    ['producto' => 'Queso Campesino 250 g', 'cantidad' => 20, 'precio_unitario' => 5500],
+                    ['producto' => 'Queso Campesino 250 g', 'cantidad' => 8, 'precio_unitario' => 5500],
                 ],
             ],
             [
                 'proveedor' => 'Aseo Total S.A.S.',
-                'fecha' => $ahora->copy()->subDays(5)->setTime(10, 15),
+                'fecha' => $ahora->copy()->subDays(2)->setTime(9, 0),
                 'detalles' => [
                     ['producto' => 'Jabón Rey 300 g', 'cantidad' => 35, 'precio_unitario' => 2200],
                     ['producto' => 'Detergente Fab 1 kg', 'cantidad' => 25, 'precio_unitario' => 7000],
