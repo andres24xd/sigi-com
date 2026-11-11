@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Cliente;
 use App\Models\Producto;
 use App\Models\Proveedor;
+use App\Models\User;
 use App\Models\Venta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,6 +20,8 @@ class Actividad4Test extends TestCase
         parent::setUp();
 
         $this->seed();
+
+        $this->actingAs(User::where('rol', 'Administrador')->firstOrFail());
     }
 
     public function test_las_pantallas_de_detalle_de_las_entidades_principales_responden(): void

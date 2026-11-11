@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer(['partials.sidebar', 'partials.topbar'], function ($view): void {
-            $view->with('usuarioActual', User::query()->orderBy('id')->first());
+            $view->with('usuarioActual', auth()->user());
         });
     }
 }

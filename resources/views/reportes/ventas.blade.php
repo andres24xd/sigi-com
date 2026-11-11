@@ -22,13 +22,18 @@
                 <input type="date" id="hasta" name="hasta" value="{{ $hasta }}" class="input">
             </div>
             <div class="lg:col-span-3">
-                <label class="label" for="usuario_id">Cajero</label>
-                <select id="usuario_id" name="usuario_id" class="input">
-                    <option value="">Todos</option>
-                    @foreach ($usuarios as $usuario)
-                        <option value="{{ $usuario->id }}" @selected((string) request('usuario_id') === (string) $usuario->id)>{{ $usuario->nombre }}</option>
-                    @endforeach
-                </select>
+                @if ($esAdmin)
+                    <label class="label" for="usuario_id">Cajero</label>
+                    <select id="usuario_id" name="usuario_id" class="input">
+                        <option value="">Todos</option>
+                        @foreach ($usuarios as $usuario)
+                            <option value="{{ $usuario->id }}" @selected((string) request('usuario_id') === (string) $usuario->id)>{{ $usuario->nombre }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    <label class="label">Cajero</label>
+                    <input type="text" class="input bg-slate-50 text-slate-500" value="{{ auth()->user()->nombre }}" disabled>
+                @endif
             </div>
             <div class="lg:col-span-3">
                 <label class="label" for="cliente_id">Cliente</label>

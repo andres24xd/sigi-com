@@ -20,12 +20,19 @@
 
         <div class="flex items-center gap-2 border-l border-slate-200 pl-3">
             <span class="grid h-9 w-9 place-items-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
-                {{ iniciales($usuarioActual->nombre ?? 'Administrador') }}
+                {{ iniciales($usuarioActual->nombre ?? 'SIGI') }}
             </span>
             <div class="hidden leading-tight md:block">
-                <p class="max-w-[200px] truncate text-sm font-semibold text-slate-800">{{ $usuarioActual->nombre ?? 'Administrador' }}</p>
-                <p class="text-xs text-slate-500">{{ $usuarioActual->rol ?? 'Administrador' }}</p>
+                <p class="max-w-[200px] truncate text-sm font-semibold text-slate-800">{{ $usuarioActual->nombre ?? 'Sin sesión' }}</p>
+                <p class="text-xs text-slate-500">{{ $usuarioActual->rol ?? 'Invitado' }}</p>
             </div>
         </div>
+
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn-icon" title="Cerrar sesión" aria-label="Cerrar sesión">
+                <x-icon name="logout" class="h-4 w-4" />
+            </button>
+        </form>
     </div>
 </header>

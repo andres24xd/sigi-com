@@ -9,14 +9,19 @@ use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\User;
 use App\Models\Venta;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class ReporteController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View|RedirectResponse
     {
+        if (! $request->user()->esAdministrador()) {
+            return redirect()->route('reportes.ventas');
+        }
+
         $hoy = now();
         $inicioMes = $hoy->copy()->startOfMonth();
 
@@ -92,11 +97,16 @@ class ReporteController extends Controller
 
         $desde = $request->input('desde', now()->startOfMonth()->toDateString());
         $hasta = $request->input('hasta', now()->toDateString());
+        $usuarioActual = $request->user();
+        $esAdmin = $usuarioActual->esAdministrador();
 
         $base = Venta::query()
             ->whereDate('fecha', '>=', $desde)
             ->whereDate('fecha', '<=', $hasta)
-            ->when($request->filled('usuario_id'), function ($query) use ($request): void {
+            ->when(! $esAdmin, function ($query) use ($usuarioActual): void {
+                $query->where('usuario_id', $usuarioActual->id);
+            })
+            ->when($esAdmin && $request->filled('usuario_id'), function ($query) use ($request): void {
                 $query->where('usuario_id', $request->integer('usuario_id'));
             })
             ->when($request->filled('cliente_id'), function ($query) use ($request): void {
@@ -127,7 +137,7 @@ class ReporteController extends Controller
             ->withQueryString();
 
         $clientes = Cliente::orderBy('nombre')->get();
-        $usuarios = User::orderBy('nombre')->get();
+        $usuarios = $esAdmin ? User::orderBy('nombre')->get() : collect([$usuarioActual]);
 
         return view('reportes.ventas', compact(
             'ventas',
@@ -138,6 +148,7 @@ class ReporteController extends Controller
             'hasta',
             'clientes',
             'usuarios',
+            'esAdmin',
         ));
     }
 

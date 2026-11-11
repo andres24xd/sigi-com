@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Compra;
 use App\Models\Producto;
 use App\Models\Proveedor;
+use App\Models\User;
 use App\Models\Venta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ class Actividad3Test extends TestCase
         parent::setUp();
 
         $this->seed();
+
+        $this->actingAs(User::where('rol', 'Administrador')->firstOrFail());
     }
 
     public function test_las_rutas_principales_responden(): void
