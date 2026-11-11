@@ -67,6 +67,9 @@
                             </td>
                             <td class="td">
                                 <div class="flex items-center justify-end gap-2">
+                                    <a href="{{ route('terceros.proveedores.show', $proveedor) }}" class="btn-icon" title="Ver detalle">
+                                        <x-icon name="eye" class="h-4 w-4" />
+                                    </a>
                                     <a href="{{ route('terceros.proveedores.edit', $proveedor) }}" class="btn-icon" title="Editar">
                                         <x-icon name="pencil" class="h-4 w-4" />
                                     </a>

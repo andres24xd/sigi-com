@@ -24,6 +24,21 @@ class ProveedorController extends Controller
         return view('terceros.proveedores.index', compact('proveedores'));
     }
 
+    public function show(Proveedor $proveedor): View
+    {
+        $proveedor->loadCount('compras');
+        $proveedor->loadSum('compras', 'total');
+
+        $compras = $proveedor->compras()
+            ->withCount('detalles')
+            ->orderByDesc('fecha')
+            ->orderByDesc('id')
+            ->paginate(8)
+            ->withQueryString();
+
+        return view('terceros.proveedores.show', compact('proveedor', 'compras'));
+    }
+
     public function create(): View
     {
         return view('terceros.proveedores.create');

@@ -61,6 +61,9 @@
                             <td class="td text-slate-500">{{ formato_fecha($categoria->created_at) }}</td>
                             <td class="td">
                                 <div class="flex items-center justify-end gap-2">
+                                    <a href="{{ route('inventario.categorias.show', $categoria) }}" class="btn-icon" title="Ver detalle">
+                                        <x-icon name="eye" class="h-4 w-4" />
+                                    </a>
                                     <a href="{{ route('inventario.categorias.edit', $categoria) }}" class="btn-icon" title="Editar">
                                         <x-icon name="pencil" class="h-4 w-4" />
                                     </a>

@@ -24,6 +24,22 @@ class ClienteController extends Controller
         return view('terceros.clientes.index', compact('clientes'));
     }
 
+    public function show(Cliente $cliente): View
+    {
+        $cliente->loadCount('ventas');
+        $cliente->loadSum('ventas', 'total');
+
+        $ventas = $cliente->ventas()
+            ->with('usuario')
+            ->withCount('detalles')
+            ->orderByDesc('fecha')
+            ->orderByDesc('id')
+            ->paginate(8)
+            ->withQueryString();
+
+        return view('terceros.clientes.show', compact('cliente', 'ventas'));
+    }
+
     public function create(): View
     {
         return view('terceros.clientes.create');

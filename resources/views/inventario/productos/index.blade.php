@@ -92,6 +92,9 @@
                             </td>
                             <td class="td">
                                 <div class="flex items-center justify-end gap-2">
+                                    <a href="{{ route('inventario.productos.show', $producto) }}" class="btn-icon" title="Ver detalle">
+                                        <x-icon name="eye" class="h-4 w-4" />
+                                    </a>
                                     <a href="{{ route('inventario.productos.edit', $producto) }}" class="btn-icon" title="Editar">
                                         <x-icon name="pencil" class="h-4 w-4" />
                                     </a>

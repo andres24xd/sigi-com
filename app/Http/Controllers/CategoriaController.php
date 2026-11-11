@@ -23,6 +23,18 @@ class CategoriaController extends Controller
         return view('inventario.categorias.index', compact('categorias'));
     }
 
+    public function show(Categoria $categoria): View
+    {
+        $categoria->loadCount('productos');
+
+        $productos = $categoria->productos()
+            ->orderBy('nombre')
+            ->paginate(8)
+            ->withQueryString();
+
+        return view('inventario.categorias.show', compact('categoria', 'productos'));
+    }
+
     public function create(): View
     {
         return view('inventario.categorias.create');

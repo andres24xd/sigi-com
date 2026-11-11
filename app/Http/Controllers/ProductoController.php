@@ -43,6 +43,25 @@ class ProductoController extends Controller
         return view('inventario.productos.index', compact('productos', 'resumen', 'categorias'));
     }
 
+    public function show(Producto $producto): View
+    {
+        $producto->load('categoria');
+
+        $movimientosCompra = $producto->detallesCompra()
+            ->with('compra.proveedor')
+            ->latest('id')
+            ->limit(5)
+            ->get();
+
+        $movimientosVenta = $producto->detallesVenta()
+            ->with(['venta.cliente', 'venta.usuario'])
+            ->latest('id')
+            ->limit(5)
+            ->get();
+
+        return view('inventario.productos.show', compact('producto', 'movimientosCompra', 'movimientosVenta'));
+    }
+
     public function create(): View
     {
         $categorias = Categoria::orderBy('nombre')->get();

@@ -24,12 +24,10 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 */
 Route::prefix('inventario')->name('inventario.')->group(function () {
     Route::resource('categorias', CategoriaController::class)
-        ->parameters(['categorias' => 'categoria'])
-        ->except(['show']);
+        ->parameters(['categorias' => 'categoria']);
 
     Route::resource('productos', ProductoController::class)
-        ->parameters(['productos' => 'producto'])
-        ->except(['show']);
+        ->parameters(['productos' => 'producto']);
 });
 
 /*
@@ -54,12 +52,10 @@ Route::prefix('operaciones')->name('operaciones.')->group(function () {
 */
 Route::prefix('terceros')->name('terceros.')->group(function () {
     Route::resource('proveedores', ProveedorController::class)
-        ->parameters(['proveedores' => 'proveedor'])
-        ->except(['show']);
+        ->parameters(['proveedores' => 'proveedor']);
 
     Route::resource('clientes', ClienteController::class)
-        ->parameters(['clientes' => 'cliente'])
-        ->except(['show']);
+        ->parameters(['clientes' => 'cliente']);
 });
 
 /*
