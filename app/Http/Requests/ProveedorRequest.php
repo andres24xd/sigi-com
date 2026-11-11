@@ -18,7 +18,7 @@ class ProveedorRequest extends FormRequest
     {
         return [
             'nombre' => ['required', 'string', 'max:150'],
-            'telefono' => ['nullable', 'string', 'max:20'],
+            'telefono' => ['nullable', 'string', 'max:20', 'regex:/^[0-9+()\-\s]{7,20}$/'],
         ];
     }
 }

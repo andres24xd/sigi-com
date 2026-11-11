@@ -17,7 +17,7 @@
             :value="$proveedor->telefono ?? ''"
             placeholder="Ej. 3001234567"
         />
-        <p class="help">Opcional. Máximo 20 caracteres.</p>
+        <p class="help">Opcional. Entre 7 y 20 caracteres: números, espacios, +, - y paréntesis.</p>
     </div>
 </div>
 
