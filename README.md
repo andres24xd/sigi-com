@@ -81,14 +81,30 @@ La aplicación queda disponible en <http://127.0.0.1:8000>.
 | Administrador | `admin@sigicom.com` | `admin123` |
 | Cajero | `cajero@sigicom.com` | `cajero123` |
 
-> El inicio de sesión se integra en la fase de autenticación. Mientras tanto, las rutas
-> del panel están abiertas.
+El sistema exige iniciar sesión en `/login`. Cada rol entra a un panel distinto y solo ve
+las secciones que le corresponden.
+
+## Roles y permisos
+
+| Módulo | Administrador | Cajero |
+| --- | --- | --- |
+| Panel | Resumen general del negocio | Resumen de caja y ventas propias |
+| Categorías y productos | Crear, editar y eliminar | Solo consultar |
+| Proveedores | Total | Sin acceso |
+| Compras | Total | Sin acceso |
+| Clientes | Total | Total |
+| Ventas | Total | Total |
+| Reportes | Todos | Solo sus propias ventas |
+
+Las restricciones se aplican en el servidor con el middleware `role`, no solo ocultando
+enlaces en la interfaz. Un acceso no permitido responde con la pantalla «Acceso restringido».
 
 ## Rutas principales
 
 | URI | Descripción |
 | --- | --- |
-| `/` | Panel con indicadores |
+| `/login` | Inicio de sesión |
+| `/` | Panel (general o de cajero según el rol) |
 | `/inventario/categorias` | CRUD de categorías |
 | `/inventario/productos` | CRUD de productos |
 | `/terceros/proveedores` | CRUD de proveedores |
@@ -107,13 +123,14 @@ incluyen mensajes flash de éxito o error.
 php artisan test
 ```
 
-La suite cubre esquema y seeder, rutas y verbos HTTP, CRUD completo, validaciones, retención
-de datos con `old()`, control de stock y reportes.
+La suite cubre esquema y seeder, autenticación y permisos por rol, rutas y verbos HTTP,
+CRUD completo, validaciones, retención de datos con `old()`, control de stock y reportes.
 
 ## Estructura relevante
 
 ```
 app/Http/Controllers/     Controladores por módulo
+app/Http/Middleware/      Middleware de roles
 app/Http/Requests/        Validación con Form Requests
 app/Models/              Modelos Eloquent y relaciones
 database/migrations/     Esquema de las 9 tablas del dominio
