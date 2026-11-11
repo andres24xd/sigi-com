@@ -1,59 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SIGI-COM
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema de Información para la Gestión Integral de Inventarios, Compras y Ventas para
+negocios comerciales minoristas.
 
-## About Laravel
+Proyecto académico de **Electiva Profesional II — Ingeniería de Sistemas (UNIAJS)**,
+construido con Laravel 12, MariaDB y Blade + Tailwind CSS.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Integrantes
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Andrés Felipe Sánchez Acuña
+- Luis José Villadiego Pineda
+- Carlos Andrés Ortega Cadrazco
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Docente:** Guillermo Antonio González Márquez
 
-## Learning Laravel
+## Módulos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+1. **Catálogo e inventario** — categorías y productos con stock, precios y alertas.
+2. **Proveedores y compras** — directorio, compras con detalle y aumento automático de stock.
+3. **Clientes y ventas** — directorio, ventas con detalle, consumidor final y descuento de stock.
+4. **Reportes** — historial por fecha, cajero, cliente y proveedor, más inventario y stock bajo.
+5. **Usuarios y roles** — estructura de datos lista; login y permisos en la siguiente fase.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Stack
 
-## Laravel Sponsors
+| Componente | Versión |
+| --- | --- |
+| Laravel | 12.x |
+| PHP | 8.2+ |
+| MariaDB / MySQL | 10.4+ |
+| Blade + Tailwind CSS | 4.x |
+| Vite | 7.x |
+| PHPUnit | 11.x |
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Requisitos
 
-### Premium Partners
+- PHP 8.2 o superior con `pdo_mysql`
+- Composer 2.x
+- Node.js 20+ y npm
+- MariaDB o MySQL en ejecución (por ejemplo, XAMPP)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Instalación
 
-## Contributing
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Configura la base de datos en `.env`:
 
-## Code of Conduct
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sigi_com_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Crea la base de datos y carga los datos de prueba:
 
-## Security Vulnerabilities
+```sql
+CREATE DATABASE sigi_com_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan migrate:fresh --seed
+npm run build
+php artisan serve
+```
 
-## License
+La aplicación queda disponible en <http://127.0.0.1:8000>.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Credenciales de prueba
+
+| Rol | Correo | Contraseña |
+| --- | --- | --- |
+| Administrador | `admin@sigicom.com` | `admin123` |
+| Cajero | `cajero@sigicom.com` | `cajero123` |
+
+> El inicio de sesión se integra en la fase de autenticación. Mientras tanto, las rutas
+> del panel están abiertas.
+
+## Rutas principales
+
+| URI | Descripción |
+| --- | --- |
+| `/` | Panel con indicadores |
+| `/inventario/categorias` | CRUD de categorías |
+| `/inventario/productos` | CRUD de productos |
+| `/terceros/proveedores` | CRUD de proveedores |
+| `/terceros/clientes` | CRUD de clientes |
+| `/operaciones/compras` | Registro y consulta de compras |
+| `/operaciones/ventas` | Registro y consulta de ventas |
+| `/reportes` | Reportes de ventas, compras e inventario |
+
+Cada entidad maestra cuenta con listado, creación, detalle, edición y eliminación. Los
+formularios usan `@csrf` y `@method()`, la validación vive en Form Requests y las respuestas
+incluyen mensajes flash de éxito o error.
+
+## Pruebas
+
+```bash
+php artisan test
+```
+
+La suite cubre esquema y seeder, rutas y verbos HTTP, CRUD completo, validaciones, retención
+de datos con `old()`, control de stock y reportes.
+
+## Estructura relevante
+
+```
+app/Http/Controllers/     Controladores por módulo
+app/Http/Requests/        Validación con Form Requests
+app/Models/              Modelos Eloquent y relaciones
+database/migrations/     Esquema de las 9 tablas del dominio
+database/seeders/        Datos de prueba coherentes
+resources/views/         Vistas Blade, layout y componentes
+routes/web.php           Rutas nombradas y agrupadas
+tests/Feature/           Pruebas de integración
+docs/                    Informes de las actividades
+```
+
+## Documentación
+
+- [`docs/INFORME_ACTIVIDAD3.md`](docs/INFORME_ACTIVIDAD3.md) — rutas, controladores y vistas.
+- [`docs/INFORME_ACTIVIDAD4.md`](docs/INFORME_ACTIVIDAD4.md) — CRUD, validación y retroalimentación.
+
+## Licencia
+
+Proyecto académico. Uso educativo.
