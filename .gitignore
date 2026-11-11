@@ -22,3 +22,6 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# El informe en PDF se conserva solo en local
+docs/INFORME_ACTIVIDAD4.pdf
