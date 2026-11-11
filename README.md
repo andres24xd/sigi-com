@@ -144,7 +144,6 @@ docs/                    Informes de las actividades
 ## Documentación
 
 - [`docs/INFORME_ACTIVIDAD3.md`](docs/INFORME_ACTIVIDAD3.md) — rutas, controladores y vistas.
-- [`docs/INFORME_ACTIVIDAD4.md`](docs/INFORME_ACTIVIDAD4.md) — CRUD, validación y retroalimentación.
 
 ## Licencia
 
